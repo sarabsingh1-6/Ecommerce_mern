@@ -8,19 +8,19 @@ const registerController = async (req, res) => {
 
     //validation
     if (!name) {
-      return res.send({ error: "Name is required" });
+      return res.send({ message: "Name is required" });
     }
     if (!email) {
-      return res.send({ error: "Email is required" });
+      return res.send({ message: "Email is required" });
     }
     if (!password) {
-      return res.send({ error: "Password is required" });
+      return res.send({ message: "Password is required" });
     }
     if (!phone) {
-      return res.send({ error: "Phone is required" });
+      return res.send({ message: "Phone is required" });
     }
     if (!address) {
-      return res.send({ error: "Address is required" });
+      return res.send({ message: "Address is required" });
     }
 
     //check user
@@ -29,7 +29,7 @@ const registerController = async (req, res) => {
     //existing users
     if (existingUser) {
       return res.status(200).send({
-        success: true,
+        success: false,
         message: "Already Register please login",
       });
     }
@@ -102,13 +102,13 @@ const loginController = async (req, res) => {
         name: user.name,
         email: user.email,
         phone: user.phone,
-        address: user.address
+        address: user.address,
       },
       token,
     });
   } catch (error) {
     console.log(error);
-    res.status(500).json({
+    res.status(500).send({
       success: false,
       message: "Error in login",
       error,
@@ -116,7 +116,11 @@ const loginController = async (req, res) => {
   }
 };
 
+const testController = (req, res) => {
+  res.send("protected route");
+};
 module.exports = {
   registerController,
   loginController,
+  testController,
 };

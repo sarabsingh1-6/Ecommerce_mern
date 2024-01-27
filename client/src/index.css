@@ -1,0 +1,70 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Marcellus&family=Montserrat:wght@300;400;800&family=Poppins:wght@300;400&family=Quicksand:wght@300;400;500;600;700&family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Marcellus&family=Montserrat:wght@300;400;800&family=Playfair+Display:wght@700&family=Poppins:wght@300;400&family=Quicksand:wght@300;400;500;600;700&family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* font-family: 'Poppins', sans-serif; */
+/* font-family: 'Playfair Display', serif; */
+
+/* Navbar css */
+.navbar{
+    font-family: 'Poppins', sans-serif;
+    font-size: 17px;
+    line-height: 26px;
+    text-transform: uppercase;
+    box-shadow: 0 8px 6px -6px gray;
+    --webkit-box-shadow: 0 8px 6px -6px gray;
+    border-bottom: 0px solid gray;
+}
+
+.nav-link{
+    font-weight: 300 !important;
+}
+
+.active{
+    border-bottom: 2px solid black;
+}
+
+.navbar-brand{
+    font-weight: 700;
+    font-family: 'roboto' sans-serif;
+    letter-spacing: normal;
+}
+
+/* Footer css */
+
+.footer{
+    color: #fff;
+    padding: 25px;
+    background: #000;
+    background: -webkit-linear-gradient(
+        to right,
+        #434343,
+        #000
+    );
+    background: linear-gradient(to right, #434343, #000);
+}
+
+.footer a{
+    text-decoration: none;
+    color: #fff;
+    padding: 10px;
+}
+
+.footer a:hover{
+    color: #ffefba;
+    border-bottom: 1px solid #ffefba;
+}
+
+/* Register page */
+.register{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+    flex-direction: column;
+}
