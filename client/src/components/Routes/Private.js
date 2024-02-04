@@ -11,17 +11,23 @@ export default function PrivateRoute() {
   //to get the user we have to use useEffect
   useEffect(() => {
     const authCheck = async () => {
-      const res = await axios.get("/api/v1/auth/user-auth"
-      // , {
-      //   headers: {
-      //     Authorization: auth?.token,
-      //   },
-      // } //header is set as default in auth.js
-      );
-      if (res.data.ok) {
-        setOk(true);
-      } else {
-        setOk(false);
+      try {
+        const res = await axios.get(
+          `${process.env.REACT_APP_API}/api/v1/auth/user-auth`
+          // , {
+          //   headers: {
+          //     Authorization: auth?.token,
+          //   },
+          // } //header is set as default in auth.js
+        );
+        if (res.data.ok) {
+          setOk(true);
+        } else {
+          setOk(false);
+        }
+      } catch (error) {
+        // Handle the error here, for example, log it or show a message to the user
+        console.error("Error during authentication check:", error);
       }
     };
     if (auth?.token) authCheck(); // if getting the token from auth then run the authCheck fun

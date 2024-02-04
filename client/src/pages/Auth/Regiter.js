@@ -11,6 +11,8 @@ const Regiter = () => {
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const [answer, setAnswer] = useState("");
+
   const navigate = useNavigate();
 
   //form function
@@ -23,7 +25,7 @@ const Regiter = () => {
         //'/api/v1/auth' is the route created in node server.js
         // name, email, password, phone, address are the fields we created in user model and saving in the DB
         `${process.env.REACT_APP_API}/api/v1/auth/register`,
-        { name, email, password, phone, address }
+        { name, email, password, phone, address, answer }
       );
       if (res.data.success) {
         // res.data.message here we are getting response from data.message which is created in authcontroller
@@ -60,7 +62,7 @@ const Regiter = () => {
               onChange={(e) => setEmail(e.target.value)}
               value={email}
               className="form-control"
-              id="exampleInputName"
+              id="userEmail"
               placeholder="Enter Your Email"
               required
             />
@@ -72,7 +74,7 @@ const Regiter = () => {
               onChange={(e) => setPassword(e.target.value)}
               value={password}
               className="form-control"
-              id="exampleInputPassword1"
+              id="UserPass"
               placeholder="Enter Your Password"
               required
             />
@@ -84,7 +86,7 @@ const Regiter = () => {
               onChange={(e) => setPhone(e.target.value)}
               value={phone}
               className="form-control"
-              id="exampleInputName"
+              id="userPhone"
               placeholder="Enter Your Phone Number"
               required
             />
@@ -96,8 +98,20 @@ const Regiter = () => {
               onChange={(e) => setAddress(e.target.value)}
               value={address}
               className="form-control"
-              id="exampleInputName"
+              id="userAddress"
               placeholder="Enter Your Address"
+              required
+            />
+          </div>
+
+          <div className="mb-3">
+            <input
+              type="text"
+              onChange={(e) => setAnswer(e.target.value)}
+              value={answer}
+              className="form-control"
+              id="secuirtyAnswer"
+              placeholder="In what city were you born?"
               required
             />
           </div>
