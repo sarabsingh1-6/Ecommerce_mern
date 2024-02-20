@@ -8,6 +8,7 @@ const {
   deleteCategoryController,
 } = require("../controllers/categoryController");
 
+//router object
 const router = express.Router();
 
 //Routes
