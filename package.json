@@ -12,7 +12,9 @@
   "author": "sarabjeetsingh",
   "license": "ISC",
   "dependencies": {
+    "@stripe/stripe-js": "^3.0.10",
     "bcrypt": "^5.1.1",
+    "braintree": "^3.22.0",
     "concurrently": "^8.2.2",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
@@ -22,6 +24,9 @@
     "mongoose": "^8.0.3",
     "morgan": "^1.10.0",
     "nodemon": "^3.0.2",
-    "slugify": "^1.6.6"
+    "react-stripe-checkout": "^2.6.3",
+    "slugify": "^1.6.6",
+    "stripe": "^14.22.0",
+    "uuid": "^9.0.1"
   }
 }

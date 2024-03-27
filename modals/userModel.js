@@ -22,6 +22,7 @@ const userSchema = new mongoose.Schema(
     },
     address: {
       type: String,
+      // type: {}, if we use textarea/multiple line for address we need object
       required: true,
     },
     answer:{

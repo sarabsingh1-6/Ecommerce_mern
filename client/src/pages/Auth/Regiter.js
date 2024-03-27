@@ -12,7 +12,6 @@ const Regiter = () => {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [answer, setAnswer] = useState("");
-
   const navigate = useNavigate();
 
   //form function
