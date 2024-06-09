@@ -3,18 +3,18 @@ import Layout from "./../components/Layout/Layout";
 import { useCart } from "../context/cart";
 import { useAuth } from "../context/auth";
 import { useNavigate } from "react-router-dom";
-// import DropIn from "braintree-web-drop-in-react";
+import DropIn from "braintree-web-drop-in-react";
 import axios from "axios";
-// import toast from "react-hot-toast";
+import toast from "react-hot-toast";
 // import StripeCheckout from "react-stripe-checkout";
 import { loadStripe } from "@stripe/stripe-js";
 
 const CartPage = () => {
   const [auth, setAuth] = useAuth();
   const [cart, setCart] = useCart();
-  // const [clientToken, setClientToken] = useState("");
-  // const [instance, setInstance] = useState("");
-  // const [loading, setLoading] = useState(false);
+  const [clientToken, setClientToken] = useState("");
+  const [instance, setInstance] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   //total price
@@ -46,42 +46,42 @@ const CartPage = () => {
   };
 
   //get payment gateway token
-  // const getToken = async () => {
-  //   try {
-  //     const { data } = await axios.get(
-  //       `${process.env.REACT_APP_API}/api/v1/product/braintree/token`
-  //     );
-  //     setClientToken(data?.clientToken);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-  // useEffect(() => {
-  //   getToken();
-  // }, [auth?.token]);
+  const getToken = async () => {
+    try {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API}/api/v1/product/braintree/token`
+      );
+      setClientToken(data?.clientToken);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getToken();
+  }, [auth?.token]);
 
-  //handle payments
-  // const handlePayment = async () => {
-  //   try {
-  //     setLoading(true);
-  //     const { nonce } = await instance.requestPaymentMethod();
-  //     const { data } = await axios.post(
-  //       `${process.env.REACT_APP_API}/api/v1/product/braintree/payment`,
-  //       {
-  //         nonce,
-  //         cart,
-  //       }
-  //     );
-  //     setLoading(false);
-  //     localStorage.removeItem("cart"); // after paymnet removing  the cart from local storage
-  //     setCart([]); // after payment  emptying the state of cart
-  //     navigate("/dashboard/user/orders");
-  //     toast.success("Payment Completed Successfully ");
-  //   } catch (error) {
-  //     console.log(error);
-  //     setLoading(false);
-  //   }
-  // };
+  // handle payments
+  const handlePayment = async () => {
+    try {
+      setLoading(true);
+      const { nonce } = await instance.requestPaymentMethod();
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_API}/api/v1/product/braintree/payment`,
+        {
+          nonce,
+          cart,
+        }
+      );
+      setLoading(false);
+      localStorage.removeItem("cart"); // after paymnet removing  the cart from local storage
+      setCart([]); // after payment  emptying the state of cart
+      navigate("/dashboard/user/orders");
+      toast.success("Payment Completed Successfully ");
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
 
   // const handelToken = async (totalAmount, token) => {
   //   try {
@@ -99,38 +99,38 @@ const CartPage = () => {
   //   handelToken(100, token);
   // };
 
-  const makePayment = async () => {
-    const stripe = await loadStripe(
-      "pk_test_51Oxh8ISIBGCXukf2gJkAWtEdLRC0gcu9DQsrYRBBqiUcNclnn5SwGDGZ7REhhGBvUInMHiSRcqe6hwJVQqALe0RZ00oPe5TRQN"
-    );
+  // const makePayment = async () => {
+  //   const stripe = await loadStripe(
+  //     "pk_test_51Oxh8ISIBGCXukf2gJkAWtEdLRC0gcu9DQsrYRBBqiUcNclnn5SwGDGZ7REhhGBvUInMHiSRcqe6hwJVQqALe0RZ00oPe5TRQN"
+  //   );
 
-    const body = {
-      products: cart,
+  //   const body = {
+  //     products: cart,
 
-    };
+  //   };
 
-    const headers = {
-      "Content-Type": "application/json",
-    };
+  //   const headers = {
+  //     "Content-Type": "application/json",
+  //   };
 
-    const response = await fetch(
-      `${process.env.REACT_APP_API}/api/v1/stripe/create-checkout-session`,
-      {
-        method: "POST",
-        headers: headers,
-        body: JSON.stringify(body), 
-      }
-    );
+  //   const response = await fetch(
+  //     `${process.env.REACT_APP_API}/api/v1/stripe/create-checkout-session`,
+  //     {
+  //       method: "POST",
+  //       headers: headers,
+  //       body: JSON.stringify(body), 
+  //     }
+  //   );
 
-    const session = await response.json();
-    const result = stripe.redirectToCheckout({
-      sessionId: session.id,
-    });
+  //   const session = await response.json();
+  //   const result = stripe.redirectToCheckout({
+  //     sessionId: session.id,
+  //   });
 
-    if (result.error) {
-      console.log(result.error);
-    }
-  };
+  //   if (result.error) {
+  //     console.log(result.error);
+  //   }
+  // };
 
   return (
     <Layout>
@@ -217,7 +217,7 @@ const CartPage = () => {
                 )}
               </div>
             )}
-            {/* <div className="mt-2">
+            <div className="mt-2">
               {!clientToken || !cart?.length ? (
                 ""
               ) : (
@@ -241,14 +241,14 @@ const CartPage = () => {
                   </button>
                 </>
               )}
-            </div> */}
+            </div>
 
             {/* <StripeCheckout
               stripeKey="pk_test_51Oxh8ISIBGCXukf2gJkAWtEdLRC0gcu9DQsrYRBBqiUcNclnn5SwGDGZ7REhhGBvUInMHiSRcqe6hwJVQqALe0RZ00oPe5TRQN"
               token={tokenHandler}
             /> */}
 
-            <button onClick={makePayment}>Checkout</button>
+            {/* <button onClick={makePayment}>Checkout</button> */}
           </div>
         </div>
       </div>
